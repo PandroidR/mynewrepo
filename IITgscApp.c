@@ -1020,7 +1020,7 @@ void ContinuousSaveData(){
   kbflush();
   if(dNumChan == 0){
     ValueRead = AI64SSA_Read_Local32(ulBdNum, &ulErr, FW_REV);
-    dNumChan = (ValueRead&0x10000) ? 32:64;                     //ratnesh: FW_REV register 0000 0028h with default value for our board should be 0000 0000h.
+    dNumChan = (ValueRead&0x10000) ? 32:64;                     //ratnesh: FW_REV register 0000 0028h with default value for this board should be 0000 0000h.
   }                                                             // ratnesh: value read = 0000 0000h ANDing it with 0001 0000h will give 0. so expression false hence dNumChan=64
 
 BADRATE:
