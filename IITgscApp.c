@@ -32,11 +32,13 @@ void Data_Demo(void);
 void Ext_Burst_Demo(void);
 
 DWORD WINAPI
-InterruptAttachThreadDma(
+InterruptAttachThreadDma      //RATNESH: this function is called in ContinuousSaveData() and its functionality is explained just after ContinuousSaveData()
+(
     LPVOID pParam
     );
 DWORD WINAPI
-DiskWriteFunction(
+DiskWriteFunction            //RATNESH: this thread is called in MultiBoardExample() and its functionality is explained just after MultiBoardExample()
+(
     LPVOID pParam
     );
 
@@ -1025,7 +1027,8 @@ BADRATE:
   cprintf("Please enter the sample rate (Hz)... ");
   scanf("%ld",&sampleRate);
   kbflush();
-  if((sampleRate < 5000) || (sampleRate > 200000)){
+  if((sampleRate < 5000) || (sampleRate > 200000))
+  {
       cprintf("\n  Invalid Rate %ld (5K Min : 200000 Max)",sampleRate);
 	  anykey();
 	  kbflush();
@@ -1077,7 +1080,7 @@ BADRATE:
    {
       if(i64FreeBytesToCaller < (ULONGLONG)bytes_needed)
 	  {
-      cprintf("\n  Not Enough Disk Space for %.1lf MBytes",((double)memNeeded*(double)sec_to_run*4.0)/1000000.0); 
+      cprintf("\n  Not Enough Disk Space for %.1lf MBytes",((double)memNeeded*(double)sec_to_run*4.0)/1000000.0);  //ratnesh: divide by 1000000 is to change it in MB.
 	  PutCursor(CurX,CurY);
 	  anykey();
 	  kbflush();
