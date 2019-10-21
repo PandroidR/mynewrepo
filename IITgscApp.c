@@ -11,7 +11,7 @@
 //------------------------------------------------------------------------------
 #define _WIN32_WINDOWS 0x0500 // Not supported by 95
 
-#include <conio.h>       //for cprintf(), kbhit(),
+#include <conio.h>       //ratnesh: for cprintf(), kbhit(),
 #include <stdio.h>
 #include <windows.h>
 #include <winbase.h>
