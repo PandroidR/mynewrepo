@@ -792,13 +792,13 @@ void PutCursor(U32 FixedX, U32 FixedY)
 void set_vRange(double range){
 
   ValueRead = AI64SSA_Read_Local32(ulBdNum, &ulErr, BCR);
-  ValueRead &= 0xFFFFFFCF;
+  ValueRead &= 0xFFFFFFCF;  //ratnesh: setting D04 D05 of BCR as 00 (+/- 2.5V).
   if(range == 10.0)
-	  ValueRead |= 0x20;
+	  ValueRead |= 0x20;   //ratnesh : Changing the value of D04 D05 of BCR.
   else
    if(range == 5.0)
-	  ValueRead |= 0x10;
-  AI64SSA_Write_Local32(ulBdNum, &ulErr, BCR,ValueRead);
+	  ValueRead |= 0x10;   //ratnesh: Changing the value of D04 D05 of BCR.
+  AI64SSA_Write_Local32(ulBdNum, &ulErr, BCR,ValueRead);       // ratnesh: writing the changed value in BCR.
 
 
 }
@@ -1020,8 +1020,9 @@ void ContinuousSaveData(){
   kbflush();
   if(dNumChan == 0){
     ValueRead = AI64SSA_Read_Local32(ulBdNum, &ulErr, FW_REV);
-    dNumChan = (ValueRead&0x10000) ? 32:64;                     //ratnesh: FW_REV register 0000 0028h with default value for this board should be 0000 0000h.
-  }                                                             // ratnesh: value read = 0000 0000h ANDing it with 0001 0000h will give 0. so expression false hence dNumChan=64
+    dNumChan = (ValueRead&0x10000) ? 32:64;               //ratnesh: FW_REV register 0000 0028h with default value for this board should be 0000 0000h.
+  }                                                      // ratnesh: value read = 0000 0000h ANDing it with 0001 0000h will give 0. so expression false hence dNumChan=64
+                                                        //ratnesh: Here 0001 0000h is written because if 17th bit in FW_REV register 0000 0028h is high, it selects only 32 channels (Datasheet page15)
 
 BADRATE:
   cprintf("Please enter the sample rate (Hz)... ");
